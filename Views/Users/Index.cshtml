@@ -1,0 +1,105 @@
+﻿@model IEnumerable<PropertyRentalManagement.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <h1>Users Administration</h1>
+            <br>
+            <p>
+                <a asp-action="Create" class="btn btn-primary custom-button">Create a New User</a>
+            </p>
+            <br>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Search", "Users", FormMethod.Get))
+{
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-2">
+                <label for="role" class="mr-sm-2"><strong>Search by Role:</strong></label>
+            </div>
+            <div class="col-md-5">
+                <select name="role" class="form-control mb-2 mr-sm-2">
+                    <option value="">All Roles</option>
+                    <option value="Tenant">Tenant</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Owner">Owner</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary mb-2 custom-button">Search</button>
+            </div>
+        </div>
+    </div>
+}
+
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TreatmentPronoun)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TreatmentPronoun)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                **********
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserId" style="color: #2E6C55;">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserId" style="color: #2E6C55;">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserId" style="color: #2E6C55;">Delete</a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

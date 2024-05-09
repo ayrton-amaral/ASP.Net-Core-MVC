@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PropertyRentalManagement.styles.css" asp-append-version="true" />
+</head>
+
+@{
+    if(Context.User.Identity.IsAuthenticated) {
+        ViewData["displayHome"] = "";
+        ViewData["displaySignOut"] = "";
+        ViewData["displayAppointments"] = "";
+        ViewData["displayMessages"] = "";
+        ViewData["displaySignIn"] = "display:none";
+        ViewData["displaySignUp"] = "display:none";
+        ViewData["role"] = Context.User.FindFirst("role").Value;
+        ViewData["displayApartments"] = "";
+
+        if(ViewData["role"].Equals("Tenant")){
+            ViewData["displayBuildings"] = "display:none";
+            ViewData["displayUsers"] = "display:none";
+        } else {
+            ViewData["displayBuildings"] = "";
+            ViewData["displayUsers"] = "";
+        }
+
+        if (ViewData["role"].Equals("Manager"))
+        {
+            ViewData["displayUsers"] = "display:none";
+        }
+    } 
+    else {
+        ViewData["role"] = "";
+        ViewData["displayHome"] = "display:none";
+        ViewData["displaySignUp"] = "";
+        ViewData["displaySignIn"] = "";
+        ViewData["displaySignOut"] = "display:none";
+        ViewData["displayApartments"] = "display:none";
+        ViewData["displayAppointments"] = "display:none";
+        ViewData["displayMessages"] = "display:none";
+        ViewData["displayUsers"] = "display:none";
+        ViewData["displayBuildings"] = "display:none";
+    }
+}
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar border-bottom box-shadow mb-3 ">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white; margin-inline-end:40px; " >Property Rental Management System</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Customizing my NavBar in HomeController -->
+                        <li class="nav-item" style="@ViewData["displayHome"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displayBuildings"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Buildings" asp-action="Index">Buildings</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displayApartments"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Apartments" asp-action="Index">Apartments</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displayAppointments"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displayMessages"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Messages" asp-action="Index">Messages</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displayUsers"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displaySignIn"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="SignIn" asp-action="Index">Sign In</a>
+                        </li>
+                        <li class="nav-item" style="@ViewData["displaySignUp"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="SignUp" asp-action="Index">Sign Up</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav flex-grow-2">
+                        <li class="nav-item" style="@ViewData["displaySignOut"]">
+                            <a class="nav-link text-light" asp-area="" asp-controller="SignIn" asp-action="SignOut">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Image placement -->
+    
+
+    <!-- Layout's content -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Property Rental Management System
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

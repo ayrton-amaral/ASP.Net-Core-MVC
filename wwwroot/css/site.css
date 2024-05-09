@@ -1,0 +1,42 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.custom-button {
+    background-color: #60E2A9;
+    border-color: #2E6C55;
+    color: black;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.custom-button:hover {
+    background-color: #2E6C55;
+    border-color: #60E2A9;
+    color: white;
+}
+
+.custom-navbar {
+    background-color: #2E6C55;
+    color: white;
+}

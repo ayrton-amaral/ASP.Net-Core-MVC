@@ -1,0 +1,78 @@
+﻿@model PropertyRentalManagement.Models.Appointment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <h1>Appointments</h1>
+            <br>
+            <h4>Update Appointment Information</h4>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="AppointmentId" />
+
+            <div class="form-group">
+                <label asp-for="AppointmentDate" class="control-label"></label>
+                <select asp-for="AppointmentDate" class="form-control">
+                    <option value="2024/04/18">2024/04/18</option>
+                    <option value="2024/04/23">2024/04/23</option>
+                    <option value="2024/04/25">2024/04/25</option>
+                    <option value="2024/04/30">2024/04/30</option>
+                    <option value="2024/05/02">2024/05/02</option>
+                    <option value="2024/05/07">2024/05/07</option>
+                    <option value="2024/05/09">2024/05/09</option>
+                    <option value="2024/05/14">2024/05/14</option>
+                    <option value="2024/05/16">2024/05/16</option>
+                    <option value="2024/05/21">2024/05/21</option>
+                    <option value="2024/05/23">2024/05/23</option>
+                    <option value="2024/05/28">2024/05/28</option>
+                    <option value="2024/05/30">2024/05/30</option>
+                </select>
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label asp-for="AppointmentTime" class="control-label"></label>
+                <select asp-for="AppointmentTime" class="form-control">
+                    <option value="10:00">10:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="16:00">16:00</option>
+                </select>
+                <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label asp-for="Tenant" class="control-label"></label>
+                <select asp-for="TenantId" class="form-control" asp-items="ViewBag.TenantId"></select>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label asp-for="Manager" class="control-label"></label>
+                <select asp-for="ManagerId" class="form-control" asp-items="ViewBag.ManagerId"></select>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <input type="submit" value="Send Changes" class="btn btn-primary custom-button" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
